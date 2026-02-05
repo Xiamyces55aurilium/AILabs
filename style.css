@@ -1,0 +1,309 @@
+:root {
+    --bg-color: #f7f5f0; /* Off-white paper */
+    --panel-bg: #ffffff;
+    --text-color: #2c3e50;
+    --accent-color: #3498db;
+    --border-color: #bdc3c7;
+    --success-color: #27ae60; /* Green pencil */
+    --warning-color: #f39c12; /* Amber */
+    --danger-color: #c0392b; /* Red cross-hatching */
+    
+    --font-heading: 'Permanent Marker', cursive;
+    --font-body: 'Outfit', sans-serif;
+    
+    --shadow-soft: 2px 2px 0px rgba(0,0,0,0.1);
+    --border-sketchy: 2px solid #2c3e50;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-image: radial-gradient(#d0d0d0 1px, transparent 1px);
+    background-size: 20px 20px; /* Dot grid pattern */
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    margin: 0;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    transform: rotate(-1deg);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin: 5px 0 0 0;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    min-height: 0; /* Important for flex scrolling */
+}
+
+.panel {
+    background: var(--panel-bg);
+    border: var(--border-sketchy);
+    border-radius: 8px 255px 15px 255px / 255px 15px 225px 15px; /* Sketchy border radius */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-soft);
+}
+
+#library {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+#workspace {
+    flex: 1;
+    position: relative;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    margin-top: 0;
+    font-size: 1.5rem;
+    border-bottom: 2px dashed #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: 2px solid transparent;
+    border-bottom: 2px solid #ddd;
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.tab-btn:hover {
+    background-color: #f9f9f9;
+}
+
+/* Component List */
+.component-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 5px;
+}
+
+.component-item {
+    padding: 10px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.1s;
+    user-select: none;
+    border-radius: 4px;
+}
+
+.component-item:hover {
+    transform: scale(1.02) rotate(1deg);
+    border-color: #ccc;
+}
+
+.component-item:active {
+    cursor: grabbing;
+}
+
+.component-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.component-info h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.component-info p {
+    margin: 2px 0 0 0;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Canvas Area */
+.canvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stability-tool {
+    width: 40px;
+    height: 40px;
+}
+
+#canvas-area {
+    flex: 1;
+    background-color: #fcfcfc;
+    border: 1px dashed #ccc;
+    margin: 10px 0;
+    position: relative;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 4px; /* Internal simpler border */
+}
+
+#drop-zone-container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Stack from top */
+    padding-bottom: 100px; /* Space at bottom */
+}
+
+#drop-zone {
+    width: 60%;
+    min-width: 300px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column-reverse; /* Build from bottom up? Or top down? Prompt says "Stacking horizontal tissue layers". Usually tissues build up or are viewed cross-section. Let's do Standard Top-Down stack for visual clarity or Bottom-Up for physical building?
+    "Layers behave like paper strips"
+    "Stacking horizontal usage"
+    Let's go with column (Top to Bottom visual stack) */
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    background: rgba(255,255,255,0.5);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #aaa;
+    font-style: italic;
+    border: 2px dashed #eee;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+/* Layers on Canvas */
+.tissue-layer {
+    height: 80px;
+    width: 100%;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    margin-bottom: -5px; /* Overlap slightly for organic feel */
+    cursor: pointer;
+}
+
+.tissue-layer.dragging {
+    opacity: 0.5;
+}
+
+.tissue-layer-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.tissue-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none; /* Let clicks pass through if needed, but we need drag */
+}
+
+.layer-label {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: #444;
+}
+
+/* Feedback Overlay styles */
+.feedback-overlay {
+    position: absolute;
+    top: 5px; right: 5px;
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+}
+
+/* Drag Ghost */
+.drag-ghost {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.8;
+    transform: rotate(5deg);
+}
+
+#feedback-area {
+    min-height: 40px;
+    font-style: italic;
+    color: #555;
+    padding: 10px;
+    border-top: 1px dotted #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    #library {
+        width: 100%;
+        height: 200px;
+    }
+}

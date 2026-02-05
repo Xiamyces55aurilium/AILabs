@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tissue Design Sketchbook</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts as per guidelines -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+    <!-- RoughJS for sketchbook feel -->
+    <script src="rough.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Tissue Sketchbook</h1>
+            <p class="subtitle">Design. Test. Explore.</p>
+        </header>
+
+        <main>
+            <aside id="library" class="panel">
+                <h2>Library</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-category="cells">Cells</button>
+                    <button class="tab-btn" data-category="scaffolds">Scaffolds</button>
+                    <button class="tab-btn" data-category="growth-factors">Factors</button>
+                </div>
+                <div id="component-list" class="component-list">
+                    <!-- filled by js -->
+                </div>
+            </aside>
+
+            <section id="workspace" class="panel">
+                <div class="canvas-header">
+                    <h2>Tissue Assembly</h2>
+                    <div id="stability-indicator" class="stability-tool" title="Stability Indicator">
+                        <!-- SVG handled by js -->
+                    </div>
+                </div>
+                <div id="canvas-area" class="sketch-canvas">
+                    <div id="drop-zone-container">
+                        <div id="drop-zone" class="drop-zone">
+                            <div class="empty-state">Drag components here to start...</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="feedback-area" class="feedback-area">
+                    <!-- Real-time feedback messages appear here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="bundle.js"></script>
+</body>
+
+</html>
